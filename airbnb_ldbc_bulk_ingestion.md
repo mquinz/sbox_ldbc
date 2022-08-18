@@ -83,6 +83,9 @@ creationDate:DATETIME|id:ID(Comment)|locationIP:STRING|browserUsed:STRING|conten
 
 ## Loading Syntax
 
+
+This is subject to change.  Please use the syntax in the scripts directory for the latest.
+
 ```Text
 
 ../bin/neo4j-admin import \
