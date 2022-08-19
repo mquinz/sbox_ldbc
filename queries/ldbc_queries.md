@@ -10,8 +10,9 @@ For a given :Person.id, find the person and return some properties
 tested successfully on SF1
 
 ### Results
+``` text
 Started streaming 1 records after 1 ms and completed after 1 ms.
-
+```
 ### Optimized Cypher
 
 ``` text
@@ -32,7 +33,6 @@ MATCH (n:Person {id:$personId})-[:LOCATED_IN]->(p)
         n.gender AS gender,
         n.creationDate AS creationDate
 ```
-`
 
 ## i_short_2
 10 most recent posts and replies to those posts - and to those replies - up to 3 levels down
@@ -44,7 +44,11 @@ For a given :Person.id, find the person and their 10 most recent posts.  Find al
 tested successfully on SF1
 
 ### Results
+``` text
 Started streaming 10 records after 23 ms and completed after 26 ms.
+```
+
+### Optimized Cypher
 
 ``` Cypher
 :params
@@ -87,8 +91,13 @@ For a given :Person.id, find the person and the 10 :Persons with the most recent
 
 ### Status
 tested successfully on SF1
+
 ### Results
+``` text
 Started streaming 7 records after 1 ms and completed after 3 ms.
+```
+
+### Optimized Cypher
 
 ``` Cypher
 :params
@@ -117,7 +126,10 @@ For a given :Message.id, find the message and return some properties.
 ### Status
 tested successfully on SF1
 ### Results
+``` text
 Started streaming 1 records in less than 1 ms and completed after 517 ms.
+```
+### Optimized Cypher
 
 ``` Cypher
 
@@ -129,12 +141,7 @@ MATCH (m:Message {id:  $messageId })
 RETURN
     m.creationDate as messageCreationDate,
     coalesce(m.content, m.imageFile) as messageContent
-
-
 ```
-
-
-
 ## i_short_5
 Get Message by Id
 
@@ -143,12 +150,11 @@ For a given :Message.id, retrieve the name of the creator.
 ### Status
 tested successfully on SF1
 ### Results
+```text
 Started streaming 1 records in less than 1 ms and completed after 478 ms.
-
+```
 ### Optimized Cypher
 ``` Cypher
-
-
 /*
 :param messageId: 206158431836
  */
@@ -163,7 +169,6 @@ MATCH (m:Message {id:msgId})-[:HAS_CREATOR]->(p)
           p.lastName AS lastName
 ```
 
-
 ## i_short_6
 Get the name of the :Forum and :Moderator for the parent :Post given the id of a comment.
 
@@ -174,11 +179,12 @@ For a given :Comment.id, traverse a recursive relationship find the parent :Post
 tested successfully on SF1
 
 ### Results
+``` text
 Started streaming 1 records after 1 ms and completed after 8 ms.
+```
 
 ### Optimized Cypher
 ``` Cypher
-
 
 /*
 :param messageId: 206158431836
@@ -208,12 +214,11 @@ For a given :Message.id (either a :Post or :Comment) get the names of all person
 tested successfully on SF1
 
 ### Results
+``` text
 Started streaming 3 records after 1 ms and completed after 505 ms.
-
+```
 ### Optimized Cypher
 ``` Cypher
-
-
 /*
 :param messageId: 824633721393
  */
@@ -234,8 +239,7 @@ Started streaming 3 records after 1 ms and completed after 505 ms.
          exists((author)-[:KNOWS]-(replyAuthor)) AS replyAuthorKnowsOriginalMessageAuthor
         ORDER BY commentCreationDate DESC, replyAuthorId ASC
 ```
-
-
+----
 
 # Complex Queries
 
@@ -250,7 +254,9 @@ A person may have many friends with the same first name. This query finds the 20
 tested successfully on SF1
 
 ### Results
+``` Text
 Started streaming 20 records after 1 ms and completed after 240 ms.
+```
 
 ### Optimized Cypher
 
@@ -310,10 +316,8 @@ MATCH (p:Person {id:$p1Id}), (friend:Person {firstName:$firstName})
        LIMIT 20
 ```
 
-
 ## Query i_complex_2
 Find closest friends with same first name
-
 
 ### Description
 Get the 20 most recent messages from :Persons that know a given person where the messages are also before a given date
@@ -322,8 +326,9 @@ Get the 20 most recent messages from :Persons that know a given person where the
 tested successfully on SF1
 
 ### Results
+``` Text
 Started streaming 20 records after 1 ms and completed after 226 ms.
-
+```
 ### Optimized Cypher
 
 ``` text
@@ -404,8 +409,9 @@ match p=(post:Post {id: $messageId })<-[:REPLY_TO_POST]-(:Comment)<-[:REPLY_TO_C
 return p
 ```
 
-## extra query -Counting Tags for LIKES
-Find the Tags for all LIKES for comments during a particular timeframe.
+## Counting Tags for LIKES for timeframe
+
+10 most popular LIKES for comments during a particular timeframe.
 
 ``` Cypher
 // 10 most popular tags for a given date range
@@ -418,7 +424,7 @@ return tag, count order by count desc limit 10
 ```
 
 
-## extra query - Trending Tags
+## Trending Tags
 Find the Tags for all LIKES for comments during a particular timeframe.
 
 ``` Cypher
