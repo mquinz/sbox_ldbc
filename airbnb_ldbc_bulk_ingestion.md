@@ -133,10 +133,7 @@ This is subject to change.  Please use the syntax in the scripts directory for t
 ```
 ## Output
 
-put output from latest import here
-``` Text
-
-```
+The output from the neo4j-admin import job can be found [here](../output/results.txt).
 
 # Mounting the database
 
