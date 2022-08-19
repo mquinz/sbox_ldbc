@@ -534,7 +534,7 @@ The original query is somewhat odd because it finds the Forum and all of the Pos
 
 This query is also impacted by the poor data modeling decision to link Comments & Posts to Country nodes.  When a Comment is deleted with the DETACH option, its relationship to the Country will also be released.  Given that several of the Country nodes will be supernodes with millions/billions of relationships,  subjecting these nodes to millions of relationship deletes could cause significant locking issues.
 
-![DeletingForum](delete_forum_comments.png "Impacted Nodes")
+![DeletingForum](../delete_forum_comments.png "Impacted Nodes")
 
 This diagram helps to show the nodes and relationships that could be affected by this Cypher.  Most of the nodes and ALL of the relationships shown would have to be deleted.  Deleting relationships from supernodes such as the Country nodes could result in locking issues and OOM.  
 
@@ -543,15 +543,13 @@ tested successfully on SF1
 
 ### Results
 ``` text
-Deleted 1 relationship, started streaming 1 records in less than 1 ms and completed after 2 ms.
+Deleted 281 nodes, deleted 1027 relationships, started streaming 1 records after 46 ms and completed after 254 ms.
 ```
 ### Original Cypher
 
 From https://github.com/ldbc/ldbc_snb_interactive_impls/blob/main/cypher/queries/interactive-delete-4.cypher
 
-
 ``` text
-
 // DEL 4: Remove forum and its content
 MATCH (forum:Forum {id: $forumId})
 OPTIONAL MATCH (forum)-[:CONTAINER_OF]->(:Post)<-[:REPLY_OF*0..]-(message)
@@ -567,6 +565,13 @@ RETURN count(*)
   "forumId": 687194767415l
 }
 
+MATCH (forum:Forum {id:toInteger($forumId)} )-[:CONTAINS]->(:Post)<-[r:REPLY_OF*..]-(message)
+// delete replying comments
+CALL { WITH message
+DETACH DELETE message
+} IN TRANSACTIONS OF 10000 ROWS
+
+return count(*)
 
 ```
 
