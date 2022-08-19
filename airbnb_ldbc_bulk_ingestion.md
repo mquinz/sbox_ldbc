@@ -7,6 +7,9 @@ These steps should be used for the bulk ingestion of LDBC-SF* data files.  They 
 
 The basis of this work is the LDBC GitHub repo at https://github.com/ldbc/ldbc_snb_interactive_impls  
 
+The individual queries can be found at:
+https://github.com/ldbc/ldbc_snb_interactive_impls/tree/main/cypher/queries
+
 The LDBC scripts and data files on this repo were used as a starting point, but after careful analysis of the data model, it was decided to make minor tweaks to the data model to remove some obvious supernodes and to make it significantly more performant.  Unlike RDBMS rule-based data modeling processes that were codified decades ago, Neo4j's process is very flexible and architects can choose from multiple approaches in order to achieve optimal performance for the particular use case.
 
 For example, simply eliminating the superfluous relationships (:Post)-[:IS_LOCATED_IN]->(:Country) and (:Comment)-[:IS_LOCATED_IN]->(:Country) will eliminate the need for potentially billions of unnecessary relationships - most of which would have been attached to only a handful of supernodes.  Storing a well-known Country abreviation e.g. 'UK', 'USA', 'DK' as a property on the :Post node instead of using a relationship to the :Country record is arguably a violation of the RDBMS Normalization rules, but is an expedient choice in Neo4j Graph modeling.

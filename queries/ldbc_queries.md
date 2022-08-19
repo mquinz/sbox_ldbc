@@ -395,6 +395,183 @@ MATCH (:Person {id:pId})-[:KNOWS]-(friend)<-[:HAS_CREATOR]-(message)
        LIMIT 20
 ```
 
+
+# Delete Queries
+
+## Interactive-Delete-1
+
+### Description
+Find a person and delete them and the forums they moderate.  Delete posts and comments for those forums.
+
+### Status
+tested successfully on SF1
+
+### Results
+``` text
+Deleted 535 nodes, deleted 2668 relationships, started streaming 1 records after 167 ms and completed after 311 ms.
+```
+### Original Cypher
+
+From https://github.com/ldbc/ldbc_snb_interactive_impls/blob/main/cypher/queries/interactive-delete-1.cypher
+
+
+``` text
+
+// set the parameters
+:params
+{
+  "personId": 26388279067642
+}
+WITH toInteger($personId) as personId
+
+// DEL 1: Remove person and its personal forums and message (sub)threads
+MATCH (person:Person {id: personId})
+// DEL 6/7: Post/Comment
+OPTIONAL MATCH (person)<-[:HAS_CREATOR]-(:Message)<-[:REPLY_OF*0..]-(message1:Message)
+// DEL 4: Forum
+OPTIONAL MATCH (person)<-[:HAS_MODERATOR]-(forum:Forum)
+WHERE forum.title STARTS WITH 'Album '
+   OR forum.title STARTS WITH 'Wall '
+OPTIONAL MATCH (forum)-[:CONTAINER_OF]->(:Post)<-[:REPLY_OF*0..]-(message2:Message)
+DETACH DELETE person, forum, message1, message2
+RETURN count(*)
+```
+
+
+## Interactive-Delete-2
+Delete a Like
+
+### Description
+Delete a Like for a Post by a Person
+
+### Status
+tested successfully on SF1
+
+### Results
+``` text
+Deleted 1 relationship, started streaming 1 records in less than 1 ms and completed after 2 ms.
+```
+### Original Cypher
+
+From https://github.com/ldbc/ldbc_snb_interactive_impls/blob/main/cypher/queries/interactive-delete-2.cypher
+
+
+``` text
+
+// DEL 2: Remove post like
+MATCH (:Person {id: toInteger($personId)})-[likes:LIKES_POST]->(:Post {id: toInteger( $postId)})
+DELETE likes
+RETURN count(*)
+
+```
+### Optimized cypher
+``` cypher
+// set the parameters
+:params
+{
+  "personId": 10995116280831,
+  "postId":412316861426
+}
+
+// DEL 2: Remove post like
+MATCH (:Person {id: toInteger($personId)})-[likes:LIKES_POST]->(:Post {id: toInteger( $postId)})
+DELETE likes
+RETURN count(*)
+```
+
+### Interactive-Delete-3
+Delete a Like for a Comment
+
+### Description
+Similar to Delete-2 which delete a Like for a Post, this Cypher deletes a Like for a Comment.  
+
+### Status
+tested successfully on SF1
+
+### Results
+``` text
+Deleted 1 relationship, started streaming 1 records in less than 1 ms and completed after 2 ms.
+```
+### Original Cypher
+
+From https://github.com/ldbc/ldbc_snb_interactive_impls/blob/main/cypher/queries/interactive-delete-3.cypher
+
+
+``` text
+
+// DEL 3: Remove comment like
+MATCH (:Person {id: $personId})-[likes:LIKES]->(:Comment {id: $commentId})
+DELETE likes
+RETURN count(*)
+
+```
+### Suggested Cypher
+``` cypher
+// set the parameters
+:params
+{
+  "personId": 19791209302342,
+  "commentId":1099511629097
+}
+
+// DEL 3: Remove Comment like
+MATCH (:Person {id: toInteger($personId)})-[likes:LIKES_COMMENT]->(:Comment {id: toInteger( $commentId)})
+DELETE likes
+RETURN count(*)
+```
+
+
+### Interactive-Delete-4
+Remove forum and its content
+
+### Description
+Remove a Forum and all of the comments to Posts in that Forum.
+
+This is potentially huge operation for very popular forums with millions of comments.  That could easily result in OOM conditions.
+If that becomes the situation, use an APOC Periodic Iterate call to batch the operations. Iterate on the posts and create a batch that recursively deletes the comments and their replies.
+
+The original query is somewhat odd because it finds the Forum and all of the Posts to that Forum and (recursively) finds all of the Comments to those Posts, but it only deletes the Forum and the Comments while leaving the Posts as potential orphans.
+
+This query is also impacted by the poor data modeling decision to link Comments & Posts to Country nodes.  When a Comment is deleted with the DETACH option, its relationship to the Country will also be released.  Given that several of the Country nodes will be supernodes with millions/billions of relationships,  subjecting these nodes to millions of relationship deletes could cause significant locking issues.
+
+![DeletingForum](delete_forum_comments.png "Impacted Nodes")
+
+This diagram helps to show the nodes and relationships that could be affected by this Cypher.  Most of the nodes and ALL of the relationships shown would have to be deleted.  Deleting relationships from supernodes such as the Country nodes could result in locking issues and OOM.  
+
+### Status
+tested successfully on SF1
+
+### Results
+``` text
+Deleted 1 relationship, started streaming 1 records in less than 1 ms and completed after 2 ms.
+```
+### Original Cypher
+
+From https://github.com/ldbc/ldbc_snb_interactive_impls/blob/main/cypher/queries/interactive-delete-4.cypher
+
+
+``` text
+
+// DEL 4: Remove forum and its content
+MATCH (forum:Forum {id: $forumId})
+OPTIONAL MATCH (forum)-[:CONTAINER_OF]->(:Post)<-[:REPLY_OF*0..]-(message)
+DETACH DELETE forum, message
+RETURN count(*)
+
+```
+### Suggested Cypher
+``` cypher
+// set the parameters
+:params
+{
+  "forumId": 687194767415l
+}
+
+
+```
+
+-----------------
+
 # Additional Queries
 These are some useful queries that were used to demonstrate some features to an internal team.  They are NOT part of the LDBC package.
 
