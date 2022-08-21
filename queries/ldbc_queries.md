@@ -568,11 +568,310 @@ RETURN count(*)
 MATCH (forum:Forum {id:toInteger($forumId)} )-[:CONTAINS]->(:Post)<-[r:REPLY_OF*..]-(message)
 // delete replying comments
 CALL { WITH message
+DETACH DELETE forum,message
+} IN TRANSACTIONS OF 10000 ROWS
+
+return count(*)
+
+```
+### Interactive-Delete-5
+Remove a member from a forum
+
+### Description
+find a forum and a member then delete the relationship between them.  
+
+### Status
+tested successfully on SF1
+
+### Results
+``` text
+Deleted 1 relationship, started streaming 1 records in less than 1 ms and completed after 15 ms.
+```
+### Original Cypher
+
+From https://github.com/ldbc/ldbc_snb_interactive_impls/blob/main/cypher/queries/interactive-delete-5.cypher
+
+
+``` text
+
+// DEL 5: Remove forum membership
+MATCH (:Forum {id: $forumId})-[hasMember:HAS_MEMBER]->(:Person {id: $personId})
+DELETE hasMember
+RETURN count(*)
+
+
+```
+### Suggested Cypher
+``` cypher
+// set the parameters
+:params
+{
+  "forumId": 687194767361,
+  "personId":30786325582874
+}
+
+// DEL 5: Remove forum membership
+MATCH (:Person {id: toInteger($personId)})<-[hasMember:HAS_MEMBER]-(:Forum {id: toInteger( $forumId)})
+DELETE hasMember
+RETURN count(*)
+```
+
+### Interactive-Delete-6
+Recursively delete all replies to a Post
+
+### Description
+find a Post and recursively delete all replies to it.  
+
+This is very similar to Delete Query-4 except it starts with a single Post - not all of the posts in a Forum.
+
+Because this query is an open-ended recursive query with potentially thousands or even millions of replies, it should be written to anticipate that.  The original Cypher from LDBC is sufficient for low volumes of messages, but an unexpectedly large volume would likely result in OOM.
+
+### Status
+tested successfully on SF1
+
+### Results
+``` text
+Deleted 12 nodes, deleted 30 relationships, started streaming 1 records after 1 ms and completed after 5 ms.
+```
+### Original Cypher
+
+From https://github.com/ldbc/ldbc_snb_interactive_impls/blob/main/cypher/queries/interactive-delete-6.cypher
+
+
+``` text
+// DEL 6: Remove post thread
+MATCH (:Post {id: $postId})<-[:REPLY_OF*0..]-(message:Message) // DEL 6/7
+DETACH DELETE message
+RETURN count(*)
+
+
+```
+### Suggested Basic Cypher
+``` cypher
+// set the parameters
+:params
+{
+  "postId": 343597384778
+}
+
+MATCH (:Post {id: toInteger($postId}))<-[:REPLY_OF*0..]-(message)  
+DETACH DELETE message
+RETURN count(*)
+
+```
+
+``
+### Suggested Heavy-Duty Cypher
+``` cypher
+// set the parameters
+:params
+{
+  "postId": 755914245410
+}
+
+MATCH (:Post {id: toInteger($postId}))<-[r:REPLY_OF*..]-(message)
+// delete replying comments
+CALL { WITH message
 DETACH DELETE message
 } IN TRANSACTIONS OF 10000 ROWS
 
 return count(*)
 
+```
+### output from heavy-duty version
+``` Text
+Deleted 11 nodes, deleted 159 relationships, started streaming 1 records in less than 1 ms and completed after 51 ms.
+```
+
+
+### Interactive-Delete-7
+Recursively delete all replies to a Comment
+
+### Description
+virtually identical to Delete-6 except   it starts with a Comment - not a Post
+
+Because this query is an open-ended recursive query with potentially thousands or even millions of replies, it should be written to anticipate that.  The original Cypher from LDBC is sufficient for low volumes of messages, but an unexpectedly large volume would likely result in OOM.
+
+### Status
+tested successfully on SF1
+
+### Results
+``` text
+Deleted 5 nodes, deleted 17 relationships, started streaming 1 records in less than 1 ms and completed after 2 ms.
+```
+### Original Cypher
+
+From https://github.com/ldbc/ldbc_snb_interactive_impls/blob/main/cypher/queries/interactive-delete-7.cypher
+
+
+``` text
+
+// DEL 7: Remove comment subthread
+MATCH (:Comment {id: $commentId})<-[:REPLY_OF*0..]-(comment:Comment)
+DETACH DELETE comment
+RETURN count(*)
+
+```
+### Suggested Basic Cypher
+``` cypher
+// set the parameters
+:params
+{
+  "commentId": 962072675535
+}
+
+MATCH (:Comment {id: toInteger($commentId)})<-[:REPLY_OF*0..]-(message)  
+DETACH DELETE message
+RETURN count(*)
+
+```
+
+``
+### Suggested Heavy-Duty Cypher
+``` cypher
+// set the parameters
+:params
+{
+  "postId": 755914245410
+}
+
+MATCH (:Comment {id: toInteger($postId)})<-[r:REPLY_OF*..]-(message)
+// delete replying comments
+CALL { WITH message
+DETACH DELETE message
+} IN TRANSACTIONS OF 10000 ROWS
+
+return count(*)
+
+```
+### output from heavy-duty version
+``` Text
+Deleted 8 nodes, deleted 25 relationships, started streaming 1 records after 1 ms and completed after 50 ms.
+```
+
+### Interactive-Delete-8
+Remove a KNOWS relationship between 2 persons.
+
+### Description
+find 2 members and delete the [:KNOWS] relationship between them.  
+
+### Status
+tested successfully on SF1
+
+### Results
+``` text
+Deleted 1 relationship, started streaming 1 records in less than 1 ms and completed after 15 ms.
+```
+### Original Cypher
+
+From https://github.com/ldbc/ldbc_snb_interactive_impls/blob/main/cypher/queries/interactive-delete-8.cypher
+
+
+``` text
+
+// DEL 8: Remove friendship
+MATCH (:Person {id: $person1Id})-[knows:KNOWS]-(:Person {id: $person2Id})
+DELETE knows
+RETURN count(*)
+
+
+```
+### Suggested Cypher
+``` cypher
+// set the parameters
+:params
+{
+  "person1Id": 6597069767338,
+  "person2Id":28587302324496
+}
+
+
+MATCH (:Person {id: toInteger($person1Id)})-[knows:KNOWS]-(:Person {id: toInteger( $person2Id)})
+DELETE knows
+RETURN count(*)
+```
+# Update queries
+
+## Update-
+
+### Interactive-Update-1
+Insert a person
+
+### Description
+Create/Merge a Person node  and link them to several other (existing) nodes.
+
+Pay careful attention to the parameters that provide relationship info.
+
+### Status
+in process
+
+### Results
+``` text
+
+```
+```
+### Original Cypher
+
+From https://github.com/ldbc/ldbc_snb_interactive_impls/blob/main/cypher/queries/interactive-update-1.cypher
+
+
+``` text
+
+MATCH (c:City {id: $cityId})
+CREATE (p:Person {
+    id: $personId,
+    firstName: $personFirstName,
+    lastName: $personLastName,
+    gender: $gender,
+    birthday: $birthday,
+    creationDate: $creationDate,
+    locationIP: $locationIP,
+    browserUsed: $browserUsed,
+    languages: $languages,
+    email: $emails
+  })-[:IS_LOCATED_IN]->(c)
+WITH p, count(*) AS dummy1
+UNWIND $tagIds AS tagId
+  MATCH (t:Tag {id: tagId})
+  CREATE (p)-[:HAS_INTEREST]->(t)
+WITH p, count(*) AS dummy2
+UNWIND $studyAt AS s
+  MATCH (u:Organisation {id: s[0]})
+  CREATE (p)-[:STUDY_AT {classYear: s[1]}]->(u)
+WITH p, count(*) AS dummy3
+UNWIND $workAt AS w
+  MATCH (comp:Organisation {id: w[0]})
+  CREATE (p)-[:WORKS_AT {workFrom: w[1]}]->(comp)
+
+  ```
+  ### Parameters
+
+  id: $personId,
+  firstName: $personFirstName,
+  lastName: $personLastName,
+  gender: $gender,
+  birthday: $birthday,
+  creationDate: $creationDate,
+  locationIP: $locationIP,
+  browserUsed: $browserUsed,
+  languages: $languages,
+  email: $emails
+
+``` cypher
+:params
+{
+  "cityId": 12,
+  "tags":[1,3,5],
+  "person": {
+    "id":12345,
+    "firstName":"Kevin",
+    "lastName":"Bacon",
+    "gender":"M",
+    "birthday":"1809-02-12",
+    "creationDate":"2022-07-04",
+    "locationIP":"127.0.0.1"
+  }
+}
 ```
 
 -----------------
