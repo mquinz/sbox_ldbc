@@ -91,6 +91,8 @@ This is subject to change.  Please use the syntax in the scripts directory for t
 
 ```Text
 
+# Note - many of these use regex to allow multiple files for nodes/edges
+
 ../bin/neo4j-admin import \
     --database=neo4j \
     --id-type=INTEGER \
@@ -101,7 +103,7 @@ This is subject to change.  Please use the syntax in the scripts directory for t
     --delimiter '|' \
     --nodes $NEO4J_IMPORT_ROOT/headers/Place_header.csv,$NEO4J_IMPORT_ROOT/nodes/place.csv  \
     --nodes=Person=$NEO4J_IMPORT_ROOT/headers/Person_header.csv,$NEO4J_IMPORT_ROOT/nodes/person.*  \
-    --nodes=Comment:Message=$NEO4J_IMPORT_ROOT/headers/Comment_header.csv,$NEO4J_IMPORT_ROOT/nodes/part-00000-613d6e5a-642d-46c0-8d46-842b7463cbe3.*  \
+    --nodes=Comment:Message=$NEO4J_IMPORT_ROOT/headers/Comment_header.csv,$NEO4J_IMPORT_ROOT/nodes/comment.*  \
     --nodes=Organization=$NEO4J_IMPORT_ROOT/headers/Organization_header.csv,$NEO4J_IMPORT_ROOT/nodes/organization.csv  \
     --nodes=Tag=$NEO4J_IMPORT_ROOT/headers/Tag_header.csv,$NEO4J_IMPORT_ROOT/nodes/tag.csv  \
     --nodes=TagClass=$NEO4J_IMPORT_ROOT/headers/TagClass_header.csv,$NEO4J_IMPORT_ROOT/nodes/tagClass.csv  \
@@ -116,22 +118,19 @@ This is subject to change.  Please use the syntax in the scripts directory for t
     --relationships=LIKES_COMMENT=$NEO4J_IMPORT_ROOT/headers/Person_LIKES_COMMENT_header.csv,$NEO4J_IMPORT_ROOT/relationships/Person_LIKES_COMMENT.csv \
     --relationships=HAS_CREATOR=$NEO4J_IMPORT_ROOT/headers/Comment_HAS_CREATOR_header.csv,$NEO4J_IMPORT_ROOT/relationships/Comment_HAS_CREATOR.*.csv \
     --relationships=REPLY_OF=$NEO4J_IMPORT_ROOT/headers/Comment_REPLY_OF_Comment_header.csv,$NEO4J_IMPORT_ROOT/relationships/Comment_REPLY_OF_Comment.*.csv \
+    --relationships=REPLY_OF=$NEO4J_IMPORT_ROOT/headers/Comment_REPLY_OF_Post_header.csv,$NEO4J_IMPORT_ROOT/relationships/Comment_REPLY_OF_Post.*.csv \
     --relationships=HAS_CREATOR=$NEO4J_IMPORT_ROOT/headers/Post_HAS_CREATOR_header.csv,$NEO4J_IMPORT_ROOT/relationships/Post_HAS_CREATOR.*.csv \
     --relationships=HAS_TAG=$NEO4J_IMPORT_ROOT/headers/Post_HAS_TAG_header.csv,$NEO4J_IMPORT_ROOT/relationships/Post_HAS_TAG.*.csv \
-
-    --relationships=IS_LOCATED_IN=$NEO4J_IMPORT_ROOT/headers/Post_LOCATED_IN_header.csv,$NEO4J_IMPORT_ROOT/relationships/Post_LOCATED_IN.*.csv \
-
-
     --relationships=HAS_TAG=$NEO4J_IMPORT_ROOT/headers/Comment_HAS_TAG_header.csv,$NEO4J_IMPORT_ROOT/relationships/Comment_HAS_TAG.*.csv \
-
-    --relationships=IS_LOCATED_IN=$NEO4J_IMPORT_ROOT/headers/Comment_LOCATED_IN_header.csv,$NEO4J_IMPORT_ROOT/relationships/Comment_LOCATED_IN.*.csv \
-
     --relationships=KNOWS=$NEO4J_IMPORT_ROOT/headers/Person_KNOWS_header.csv,$NEO4J_IMPORT_ROOT/relationships/Person_KNOWS.csv \
     --relationships=HAS_MEMBER=$NEO4J_IMPORT_ROOT/headers/Forum_HAS_MEMBER_header.csv,$NEO4J_IMPORT_ROOT/relationships/Forum_HAS_MEMBER_.* \
     --relationships=HAS_MODERATOR=$NEO4J_IMPORT_ROOT/headers/Forum_HAS_MODERATOR_header.csv,$NEO4J_IMPORT_ROOT/relationships/Forum_HAS_MODERATOR.csv \
     --relationships=CONTAINS=$NEO4J_IMPORT_ROOT/headers/Forum_CONTAINS_header.csv,$NEO4J_IMPORT_ROOT/relationships/Forum_CONTAINS.*.csv \
     --relationships=IN=$NEO4J_IMPORT_ROOT/headers/Tag_IN_header.csv,$NEO4J_IMPORT_ROOT/relationships/Tag_IN.csv \
     --relationships=IN=$NEO4J_IMPORT_ROOT/headers/TagClass_IN_header.csv,$NEO4J_IMPORT_ROOT/relationships/TagClass_IN.csv
+
+##     --relationships=IS_LOCATED_IN=$NEO4J_IMPORT_ROOT/headers/Post_LOCATED_IN_header.csv,$NEO4J_IMPORT_ROOT/relationships/Post_LOCATED_IN.*.csv \
+##     --relationships=IS_LOCATED_IN=$NEO4J_IMPORT_ROOT/headers/Comment_LOCATED_IN_header.csv,$NEO4J_IMPORT_ROOT/relationships/Comment_LOCATED_IN.*.csv \
 
 ```
 ## Output
@@ -258,7 +257,7 @@ CALL apoc.meta.stats
   "propertyKeyCount": 19,
   "labelCount": 13,
   "nodeCount": 2119276,
-  "relCount": 10957769,
+  "relCount": 11607885,
   "labels": {
 "Comment": 1190184,
 "Company": 1575,
@@ -275,7 +274,7 @@ CALL apoc.meta.stats
 "Person": 7652
   },
   "relTypes": {
-"(:Message)-[:REPLY_OF]->()": 540068,
+"(:Message)-[:REPLY_OF]->()": 1190184,
 "()-[:WORKS_AT]->(:Organization)": 16418,
 "(:Person)-[:KNOWS]->()": 115451,
 "()-[:LIKES_COMMENT]->()": 731710,
@@ -284,6 +283,7 @@ CALL apoc.meta.stats
 "(:Person)-[:WORKS_AT]->()": 16418,
 "()-[:IS_LOCATED_IN]->()": 2011063,
 "(:Person)-[:STUDY_AT]->()": 6119,
+"()-[:REPLY_OF]->(:Post)": 650116,
 "()-[:HAS_MODERATOR]->(:Person)": 74995,
 "(:Person)-[:LOCATED_IN]->()": 7652,
 "(:Person)-[:LIKES_COMMENT]->()": 731710,
@@ -305,7 +305,7 @@ CALL apoc.meta.stats
 "()-[:IN]->(:TagClass)": 16150,
 "(:Country)-[:IN]->()": 111,
 "()-[:WORKS_AT]->()": 16418,
-"()-[:REPLY_OF]->()": 540068,
+"()-[:REPLY_OF]->()": 1190184,
 "(:Forum)-[:HAS_MEMBER]->()": 1926802,
 "()-[:CONTAINS]->(:Message)": 820879,
 "()-[:CONTAINS]->()": 820879,
@@ -324,7 +324,7 @@ CALL apoc.meta.stats
 "(:Forum)-[:HAS_MODERATOR]->()": 74995,
 "(:Post)-[:IS_LOCATED_IN]->()": 820879,
 "()-[:STUDY_AT]->(:University)": 6119,
-"(:Comment)-[:REPLY_OF]->()": 540068,
+"(:Comment)-[:REPLY_OF]->()": 1190184,
 "(:Tag)-[:IN]->()": 16080,
 "()-[:LIKES_COMMENT]->(:Message)": 731710,
 "(:Message)-[:IS_LOCATED_IN]->()": 2011063,
@@ -333,12 +333,11 @@ CALL apoc.meta.stats
 "(:City)-[:IN]->()": 1343,
 "()-[:WORKS_AT]->(:Company)": 16418,
 "(:Comment)-[:IS_LOCATED_IN]->()": 1190184,
-"()-[:REPLY_OF]->(:Message)": 540068,
+"()-[:REPLY_OF]->(:Message)": 1190184,
 "()-[:LIKES_POST]->(:Post)": 521592,
 "()-[:IS_LOCATED_IN]->(:Country)": 2011063,
 "()-[:HAS_MEMBER]->(:Person)": 1926802,
 "()-[:LOCATED_IN]->()": 7652
   }
 }
-
 ```

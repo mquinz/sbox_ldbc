@@ -1,263 +1,264 @@
 Importing the contents of these files into /Users/markquinsland/Library/Application Support/Neo4j Desktop/Application/relate-data/dbmss/dbms-07b4a66d-2800-426b-afb7-cc73a00f791d/data/databases/neo4j:
 Nodes:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Place_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/place.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Place/place.csv
 
   [Organization]:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Organization_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/organization.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Organization/organization.csv
 
   [Comment, Message]:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Comment_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/comment_1.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/comment_2.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/comment_3.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/comment_4.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/comment_5.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/comment_6.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/comment_7.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/comment_8.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/comment_9.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/comment_10.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/comment_12.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/comment_13.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/comment_14.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/comment_15.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/comment_16.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/comment_17.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/comment_18.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Comment/comment_1.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Comment/comment_2.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Comment/comment_3.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Comment/comment_4.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Comment/comment_5.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Comment/comment_6.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Comment/comment_7.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Comment/comment_8.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Comment/comment_9.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Comment/comment_10.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Comment/comment_12.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Comment/comment_13.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Comment/comment_14.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Comment/comment_15.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Comment/comment_16.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Comment/comment_17.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Comment/comment_18.csv
 
   [TagClass]:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/TagClass_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/tagClass.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/TagClass/tagClass.csv
 
   [Tag]:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Tag_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/tag.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Tag/tag.csv
 
   [Person]:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Person_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/person.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Person/person.csv
 
   [Message, Post]:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Post_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/post_1.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/post_2.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Post/post_1.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Post/post_2.csv
 
   [Forum]:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Forum_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/forum.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/nodes/Forum/forum.csv
 
 Relationships:
   IS_LOCATED_IN:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Post_LOCATED_IN_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Post_LOCATED_IN_1.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Post_LOCATED_IN_2.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Post_LOCATED_IN/Post_LOCATED_IN_1.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Post_LOCATED_IN/Post_LOCATED_IN_2.csv
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Comment_LOCATED_IN_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_LOCATED_IN_1.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_LOCATED_IN_2.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_LOCATED_IN_3.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_LOCATED_IN/Comment_LOCATED_IN_1.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_LOCATED_IN/Comment_LOCATED_IN_2.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_LOCATED_IN/Comment_LOCATED_IN_3.csv
 
   LOCATED_IN:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Person_LOCATED_IN_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Person_LOCATED_IN.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Person_LOCATED_IN/Person_LOCATED_IN.csv
 
   INTERESTED_IN:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Person_INTERESTED_IN_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Person_INTERESTED_IN.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Person_INTERESTED_IN/Person_INTERESTED_IN.csv
 
   IN:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Place_IN_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Place_IN.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Place_IN/Place_IN.csv
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Tag_IN_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Tag_IN.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Tag_IN/Tag_IN.csv
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/TagClass_IN_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/TagClass_IN.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/TagClass_IN/TagClass_IN.csv
 
   REPLY_OF:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Comment_REPLY_OF_Comment_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_REPLY_OF_Comment_1.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_REPLY_OF_Comment_2.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_REPLY_OF_Comment_3.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_REPLY_OF_Comment/Comment_REPLY_OF_Comment_1.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_REPLY_OF_Comment/Comment_REPLY_OF_Comment_2.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_REPLY_OF_Comment/Comment_REPLY_OF_Comment_3.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Comment_REPLY_OF_Post_header.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_REPLY_OF_Post/Comment_REPLY_OF_Post_1.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_REPLY_OF_Post/Comment_REPLY_OF_Post_2.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_REPLY_OF_Post/Comment_REPLY_OF_Post_3.csv
 
   STUDY_AT:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Person_STUDY_AT_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Person_STUDY_AT.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Person_STUDY_AT/Person_STUDY_AT.csv
 
   CONTAINS:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Forum_CONTAINS_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Forum_CONTAINS_1.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Forum_CONTAINS_2.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Forum_CONTAINS/Forum_CONTAINS_1.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Forum_CONTAINS/Forum_CONTAINS_2.csv
 
   KNOWS:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Person_KNOWS_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Person_KNOWS.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Person_KNOWS/Person_KNOWS.csv
 
   HAS_MEMBER:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Forum_HAS_MEMBER_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Forum_HAS_MEMBER_1.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Forum_HAS_MEMBER_2.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Forum_HAS_MEMBER/Forum_HAS_MEMBER_1.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Forum_HAS_MEMBER/Forum_HAS_MEMBER_2.csv
 
   HAS_MODERATOR:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Forum_HAS_MODERATOR_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Forum_HAS_MODERATOR.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Forum_HAS_MODERATOR/Forum_HAS_MODERATOR.csv
 
   HAS_CREATOR:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Comment_HAS_CREATOR_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_HAS_CREATOR_1.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_HAS_CREATOR_2.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_HAS_CREATOR_3.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_HAS_CREATOR/Comment_HAS_CREATOR_1.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_HAS_CREATOR/Comment_HAS_CREATOR_2.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_HAS_CREATOR/Comment_HAS_CREATOR_3.csv
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Post_HAS_CREATOR_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Post_HAS_CREATOR_1.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Post_HAS_CREATOR_2.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Post_HAS_CREATOR/Post_HAS_CREATOR_1.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Post_HAS_CREATOR/Post_HAS_CREATOR_2.csv
 
   LIKES_COMMENT:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Person_LIKES_COMMENT_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Person_LIKES_COMMENT.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Person_LIKES_COMMENT/Person_LIKES_COMMENT.csv
 
   WORKS_AT:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Person_WORKS_AT_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Person_WORKS_AT.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Person_WORKS_AT/Person_WORKS_AT.csv
 
   LIKES_POST:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Person_LIKES_POST_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Person_LIKES_POST.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Person_LIKES_POST/Person_LIKES_POST.csv
 
   HAS_TAG:
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Post_HAS_TAG_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Post_HAS_TAG.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Post_HAS_TAG/Post_HAS_TAG.csv
   /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/headers/Comment_HAS_TAG_header.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_HAS_TAG_1.csv
-  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_HAS_TAG_2.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_HAS_TAG/Comment_HAS_TAG_1.csv
+  /Users/markquinsland/Documents/GitHub/sbox_ldbc/import/relationships/Comment_HAS_TAG/Comment_HAS_TAG_2.csv
 
 
 Available resources:
   Total machine memory: 32.00GiB
-  Free machine memory: 83.47MiB
+  Free machine memory: 2.262GiB
   Max heap memory : 1.000GiB
   Processors: 16
   Configured max memory: 27.90GiB
   High-IO: true
 
-WARNING: 104.1MiB memory may not be sufficient to complete this import. Suggested memory distribution is:
-heap size: 1.001GiB
-minimum free and available memory excluding heap size: 124.7MiB
-Import starting 2022-08-18 11:57:23.241-0700
+WARNING: heap size 1.000GiB may be too small to complete this import. Suggested heap size is 1.001GiB
+Import starting 2022-08-29 16:05:16.581-0700
   Estimated number of nodes: 3.30 M
   Estimated number of node properties: 19.69 M
-  Estimated number of relationships: 11.05 M
-  Estimated number of relationship properties: 11.06 M
-  Estimated disk space usage: 1.426GiB
-  Estimated required memory usage: 124.7MiB
+  Estimated number of relationships: 11.70 M
+  Estimated number of relationship properties: 11.71 M
+  Estimated disk space usage: 1.472GiB
+  Estimated required memory usage: 1.037GiB
 
-(1/4) Node import 2022-08-18 11:57:24.326-0700
+(1/4) Node import 2022-08-29 16:05:17.703-0700
   Estimated number of nodes: 3.30 M
   Estimated disk space usage: 670.7MiB
-  Estimated required memory usage: 124.7MiB
-.......... .......... .......... .......... ..........   5% ∆3s 658ms
-.......... .......... .......... .......... ..........  10% ∆608ms
-.......... .......... .......... .......... ..........  15% ∆1s 21ms
-.......... .......... .......... .......... ..........  20% ∆411ms
-.......... .......... .......... .......... ..........  25% ∆820ms
-.......... .......... .......... .......... ..........  30% ∆805ms
-.......... .......... .......-.. .......... ..........  35% ∆403ms
-.......... .......... .......... .......... ..........  40% ∆1ms
+  Estimated required memory usage: 1.037GiB
+.......... .......... .......... .......... ..........   5% ∆1s 222ms
+.......... .......... .......... .......... ..........  10% ∆404ms
+.......... .......... .......... .......... ..........  15% ∆407ms
+.......... .......... .......... .......... ..........  20% ∆200ms
+.......... .......... .......... .......... ..........  25% ∆817ms
+.......... .......... .......... .......... ..........  30% ∆201ms
+........-. .......... .......... .......... ..........  35% ∆452ms
+.......... .......... .......... .......... ..........  40% ∆0ms
 .......... .......... .......... .......... ..........  45% ∆0ms
 .......... .......... .......... .......... ..........  50% ∆200ms
-.......... .......... .......... .......... ..........  55% ∆0ms
-.......... .......... .......... .......... ..........  60% ∆201ms
+.......... .......... .......... .......... ..........  55% ∆202ms
+.......... .......... .......... .......... ..........  60% ∆0ms
 .......... .......... .......... .......... ..........  65% ∆0ms
-.......... .......... .......... .......... ..........  70% ∆203ms
-.......... .......... .......... .......... ..........  75% ∆200ms
-.......... .......... .......... .......... ..........  80% ∆0ms
-.......... .......... .......... .......... ..........  85% ∆0ms
-.......... .......... .......... .......... ..........  90% ∆200ms
-.......... .......... .......... .......... ..........  95% ∆202ms
-.......... .......... .......... .......... .......... 100% ∆202ms
-
-Node import COMPLETED in 20s 816ms
-
-(2/4) Relationship import 2022-08-18 11:57:45.143-0700
-  Estimated number of relationships: 11.05 M
-  Estimated disk space usage: 789.8MiB
-  Estimated required memory usage: 169.4MiB
-.......... .......... .......... .......... ..........   5% ∆1s 600ms
-.......... .......... .......... .......... ..........  10% ∆0ms
-.......... .......... .......... .......... ..........  15% ∆1s 9ms
-.......... .......... .......... .......... ..........  20% ∆1ms
-.......... .......... .......... .......... ..........  25% ∆202ms
-.......... .......... .......... .......... ..........  30% ∆607ms
-.......... .......... .......... .......... ..........  35% ∆402ms
-.......... .......... .......... .......... ..........  40% ∆204ms
-.......... .......... .......... .......... ..........  45% ∆405ms
-.......... .......... .......... .......... ..........  50% ∆407ms
-.......... .......... .......... .......... ..........  55% ∆206ms
-.......... .......... .......... .......... ..........  60% ∆610ms
-.......... .......... .......... .......... ..........  65% ∆203ms
-.......... .......... .......... .......... ..........  70% ∆404ms
+.......... .......... .......... .......... ..........  70% ∆202ms
 .......... .......... .......... .......... ..........  75% ∆201ms
-.......... .......... .......... .......... ..........  80% ∆609ms
-.......... .......... .......... .......... ..........  85% ∆410ms
-.......... .......... .......... .......... ..........  90% ∆203ms
-.......... .......... .......... .......... ..........  95% ∆406ms
-.......... .......... .......... .......... .......... 100% ∆726ms
+.......... .......... .......... .......... ..........  80% ∆0ms
+.......... .......... .......... .......... ..........  85% ∆1ms
+.......... .......... .......... .......... ..........  90% ∆402ms
+.......... .......... .......... .......... ..........  95% ∆0ms
+.......... .......... .......... .......... .......... 100% ∆206ms
 
-Relationship import COMPLETED in 8s 815ms
+Node import COMPLETED in 11s 676ms
 
-(3/4) Relationship linking 2022-08-18 11:57:53.959-0700
-  Estimated required memory usage: 105.4MiB
-.......... .......... .......... .......... ..........   5% ∆402ms
-.......... .......... .......... .......... ..........  10% ∆202ms
-.......... .......... .......... .......... ..........  15% ∆0ms
-.......... ......-... .......... .......... ..........  20% ∆200ms
-.......... .......... .......... .......... ..........  25% ∆402ms
-.......... .......... .......... .......... ..........  30% ∆1ms
-.......... .......... .......... .......... ..........  35% ∆202ms
-.......... .......... .......... .......... ..........  40% ∆401ms
+(2/4) Relationship import 2022-08-29 16:05:29.379-0700
+  Estimated number of relationships: 11.70 M
+  Estimated disk space usage: 836.4MiB
+  Estimated required memory usage: 1.080GiB
+.......... .......... .......... .......... ..........   5% ∆1s 228ms
+.......... .......... .......... .......... ..........  10% ∆0ms
+.......... .......... .......... .......... ..........  15% ∆805ms
+.......... .......... .......... .......... ..........  20% ∆0ms
+.......... .......... .......... .......... ..........  25% ∆607ms
+.......... .......... .......... .......... ..........  30% ∆201ms
+.......... .......... .......... .......... ..........  35% ∆402ms
+.......... .......... .......... .......... ..........  40% ∆420ms
+.......... .......... .......... .......... ..........  45% ∆203ms
+.......... .......... .......... .......... ..........  50% ∆406ms
+.......... .......... .......... .......... ..........  55% ∆426ms
+.......... .......... .......... .......... ..........  60% ∆202ms
+.......... .......... .......... .......... ..........  65% ∆407ms
+.......... .......... .......... .......... ..........  70% ∆200ms
+.......... .......... .......... .......... ..........  75% ∆606ms
+.......... .......... .......... .......... ..........  80% ∆204ms
+.......... .......... .......... .......... ..........  85% ∆407ms
+.......... .......... .......... .......... ..........  90% ∆403ms
+.......... .......... .......... .......... ..........  95% ∆202ms
+.......... .......... .......... .......... .......... 100% ∆889ms
+
+Relationship import COMPLETED in 8s 218ms
+
+(3/4) Relationship linking 2022-08-29 16:05:37.598-0700
+  Estimated required memory usage: 1.018GiB
+.......... .......... .......... .......... ..........   5% ∆403ms
+.......... .......... .......... .......... ..........  10% ∆207ms
+.......... .......... .......... .......... ..........  15% ∆200ms
+.......... .....-.... .......... .......... ..........  20% ∆411ms
+.......... .......... .......... .......... ..........  25% ∆0ms
+.......... .......... .......... .......... ..........  30% ∆201ms
+.......... .......... .......... .......... ..........  35% ∆201ms
+.......... .......... .......... .......... ..........  40% ∆201ms
 .......... .......... .......... .......... ..........  45% ∆201ms
-.......... .......... .......... .......... ..........  50% ∆200ms
-.......... .......... .......... .......... ..........  55% ∆200ms
-.......... ......-... .......... .......... ..........  60% ∆402ms
-.......... .......... .......... .......... ..........  65% ∆603ms
-.......... .......... .......... .......... ..........  70% ∆402ms
-.......... .......... .......... .......... ..........  75% ∆404ms
-.......... .......... .......... .......... ..........  80% ∆402ms
-.......... .......... .......... .......... ..........  85% ∆0ms
-.......... .......... .......... .......... ..........  90% ∆200ms
-.......... .......... .......... .......... ..........  95% ∆920ms
-.......... .......... .......... .......... .......... 100% ∆0ms
+.......... .......... .......... .......... ..........  50% ∆401ms
+.......... .......... .....-.... .......... ..........  55% ∆483ms
+.......... .......... .......... .......... ..........  60% ∆400ms
+.......... .......... .......... .......... ..........  65% ∆601ms
+.......... .......... .......... .......... ..........  70% ∆400ms
+.......... .......... .......... .......... ..........  75% ∆202ms
+.......... .......... .......... .......... ..........  80% ∆200ms
+.......... .......... .......... .......... ..........  85% ∆200ms
+.......... .......... .......... .......... ..........  90% ∆0ms
+.......... .......... .......... .......... ..........  95% ∆941ms
+.......... .......... .......... .......... .......... 100% ∆1ms
 
-Relationship linking COMPLETED in 6s 569ms
+Relationship linking COMPLETED in 6s 772ms
 
-(4/4) Post processing 2022-08-18 11:58:00.529-0700
-  Estimated required memory usage: 83.14MiB
--......... ..-....... .......... .......... ..........   5% ∆402ms
+(4/4) Post processing 2022-08-29 16:05:44.370-0700
+  Estimated required memory usage: 1020MiB
+-........- .......... .......... .......... ..........   5% ∆401ms
 .......... .......... .......... .......... ..........  10% ∆201ms
 .......... .......... .......... .......... ..........  15% ∆201ms
-.......... .......... .......... .......... ..........  20% ∆201ms
-.......... .......... .......... ........-. ..........  25% ∆200ms
-.......... .......... .......... .......... ..........  30% ∆201ms
-.......... .......... .......... .......... ..........  35% ∆200ms
-.......... .......... .......... .......... ..........  40% ∆202ms
+.......... .......... .......... .......... ..........  20% ∆0ms
+.........- .......... .......... .......... ..........  25% ∆200ms
+.......... .......... .......... .......... ..........  30% ∆0ms
+.......... .......... .......... .......... ..........  35% ∆201ms
+.......... .......... .......... .......... ..........  40% ∆0ms
 .......... .......... .......... .......... ..........  45% ∆201ms
 .......... .......... .......... .......... ..........  50% ∆0ms
-.......... .......... .......... .......... ..........  55% ∆201ms
+.......... .......... .......... .......... ..........  55% ∆0ms
 .......... .......... .......... .......... ..........  60% ∆0ms
-.......... .......... .......... .......... ..........  65% ∆200ms
+.......... .......... .......... .......... ..........  65% ∆201ms
 .......... .......... .......... .......... ..........  70% ∆0ms
 .......... .......... .......... .......... ..........  75% ∆0ms
-.......... .......... .......... .......... ..........  80% ∆1ms
-.......... .......... .......... .......... ..........  85% ∆201ms
+.......... .......... .......... .......... ..........  80% ∆201ms
+.......... .......... .......... .......... ..........  85% ∆0ms
 .......... .......... .......... .......... ..........  90% ∆0ms
-.......... .......... .......... .......... ..........  95% ∆0ms
-.......... .......... .......... .......... .......... 100% ∆0ms
+.......... .......... .......... .......... ..........  95% ∆1s 134ms
+.......... .......... .......... .......... .......... 100% ∆1ms
 
-Post processing COMPLETED in 6s 80ms
+Post processing COMPLETED in 4s 739ms
 
 
-IMPORT DONE in 51s 495ms.
+IMPORT DONE in 40s 252ms.
 Imported:
   2119276 nodes
-  10957769 relationships
-  23564651 properties
-Peak memory usage: 169.4MiB
+  11607885 relationships
+  24214767 properties
