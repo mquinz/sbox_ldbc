@@ -521,14 +521,14 @@ RETURN count(*)
 ```
 
 
-### Interactive-Delete-4
+## Interactive-Delete-4
 Remove forum and its content
 
 ### Description
 Remove a Forum and all of the comments to Posts in that Forum.
 
 This is potentially huge operation for very popular forums with millions of comments.  That could easily result in OOM conditions.
-If that becomes the situation, use an APOC Periodic Iterate call to batch the operations. Iterate on the posts and create a batch that recursively deletes the comments and their replies.
+If that becomes the situation, use the Call In Transaction batching technique along with a reasonable size for the number of records in a batch.  
 
 The original query is somewhat odd because it finds the Forum and all of the Posts to that Forum and (recursively) finds all of the Comments to those Posts, but it only deletes the Forum and the Comments while leaving the Posts as potential orphans.
 
@@ -565,10 +565,10 @@ RETURN count(*)
   "forumId": 687194767415l
 }
 
-MATCH (forum:Forum {id:toInteger($forumId)} )-[:CONTAINS]->(:Post)<-[r:REPLY_OF*..]-(message)
+MATCH (forum:Forum {id:toInteger($forumId)} )-[:CONTAINS]->(post:Post)<-[r:REPLY_OF*..]-(message)
 // delete replying comments
 CALL { WITH message
-DETACH DELETE forum,message
+DETACH DELETE forum, post, message
 } IN TRANSACTIONS OF 10000 ROWS
 
 return count(*)
@@ -616,7 +616,7 @@ DELETE hasMember
 RETURN count(*)
 ```
 
-### Interactive-Delete-6
+## Interactive-Delete-6
 Recursively delete all replies to a Post
 
 ### Description
@@ -684,7 +684,7 @@ Deleted 11 nodes, deleted 159 relationships, started streaming 1 records in less
 ```
 
 
-### Interactive-Delete-7
+## Interactive-Delete-7
 Recursively delete all replies to a Comment
 
 ### Description
@@ -749,7 +749,7 @@ return count(*)
 Deleted 8 nodes, deleted 25 relationships, started streaming 1 records after 1 ms and completed after 50 ms.
 ```
 
-### Interactive-Delete-8
+## Interactive-Delete-8
 Remove a KNOWS relationship between 2 persons.
 
 ### Description
@@ -790,11 +790,9 @@ MATCH (:Person {id: toInteger($person1Id)})-[knows:KNOWS]-(:Person {id: toIntege
 DELETE knows
 RETURN count(*)
 ```
-# Update queries
+# Update Queries
 
-## Update-
-
-### Interactive-Update-1
+## Interactive-Update-1
 Insert a person
 
 ### Description
@@ -802,13 +800,13 @@ Create/Merge a Person node  and link them to several other (existing) nodes.
 
 Pay careful attention to the parameters that provide relationship info.
 
-### Status
-in process
+The original CREATE commands were replaced with MERGE commands.  That may slow down the queries a tiny bit, but it's better from a data quality standpoint.
 
+### Status
+Test successfully using SF-1
 ### Results
 ``` text
-
-```
+Started streaming 1 records in less than 1 ms and completed after 17 ms.
 ```
 ### Original Cypher
 
@@ -846,27 +844,20 @@ UNWIND $workAt AS w
   ```
   ### Parameters
 
-  id: $personId,
-  firstName: $personFirstName,
-  lastName: $personLastName,
-  gender: $gender,
-  birthday: $birthday,
-  creationDate: $creationDate,
-  locationIP: $locationIP,
-  browserUsed: $browserUsed,
-  languages: $languages,
-  email: $emails
+
 
 ``` cypher
-:params
+params
 {
-  "cityId": 12,
-  "tags":[1,3,5],
+  "cityId": 128,
+  "tagIds":[17,18,17,20,21],
+  "studyAt":[[1596,2021],[1595,2022]],
+  "workAt":[[17,2021],[18,2022],[19,2022]],
   "person": {
     "id":12345,
-    "firstName":"Kevin",
-    "lastName":"Bacon",
-    "gender":"M",
+    "firstName":"Eleanor",
+    "lastName":"Roosevelt",
+    "gender":"F",
     "birthday":"1809-02-12",
     "creationDate":"2022-07-04",
     "locationIP":"127.0.0.1"
@@ -874,6 +865,106 @@ UNWIND $workAt AS w
 }
 ```
 
+### Suggested Cypher
+
+``` cypher
+
+MATCH (c:City {id: toInteger($cityId)})
+MERGE (p:Person {id:toInteger($person.id)})
+ON CREATE SET p += {
+    firsName:$person.firstName,
+    lastName:$person.lastName
+}
+MERGE (p)-[:LOCATED_IN]->(c)
+WITH p
+UNWIND $tagIds AS tagId
+  MATCH (t:Tag {id: tagId})
+  MERGE (p)-[:HAS_INTEREST]->(t)
+
+WITH DISTINCT p
+
+UNWIND $studyAt AS s
+  MATCH (u:University {id: toInteger(s[0])})
+  MERGE (p)-[:STUDY_AT {classYear: s[1]}]->(u)
+
+WITH DISTINCT p
+
+UNWIND $workAt AS w
+  MATCH (u:Organization {id: toInteger(w[0])})
+  MERGE (p)-[:WORK_AT {classYear: w[1]}]->(u)
+
+Return count (p) as personsAdded
+```
+
+
+
+
+
+## Interactive-Update-2
+Insert a new LIKES Post relationship for a Person
+
+### Description
+Create/Merge a new LIKES_POST relationship for an existing person and an existing Post.
+
+The original CREATE commands were replaced with MERGE commands.  That may slow down the queries a tiny bit, but it's better from a data quality standpoint.
+
+### Status
+Test successfully using SF-1
+### Results
+``` text
+Started streaming 1 records in less than 1 ms and completed after 17 ms.
+```
+### Original Cypher
+
+From https://github.com/ldbc/ldbc_snb_interactive_impls/blob/main/cypher/queries/interactive-update-2.cypher
+
+
+``` text
+
+
+MATCH (person:Person {id: $personId}), (post:Post {id: $postId})
+CREATE (person)-[:LIKES {creationDate: $creationDate}]->(post)
+  ```
+  ### Parameters
+
+
+
+``` cypher
+:params
+{
+  "personId": 128,
+  "postId":755914244157,
+  "creationDate":"2022-05-07"
+}
+```
+
+### Suggested Cypher
+
+``` cypher
+
+MATCH (post:Post {id: toInteger($postId)})
+MATCH (person:Person {id:toInteger($person.id)})
+
+MERGE (person)-[:LIKES_POST]->(post)
+WITH p
+UNWIND $tagIds AS tagId
+  MATCH (t:Tag {id: tagId})
+  MERGE (p)-[:HAS_INTEREST]->(t)
+
+WITH DISTINCT p
+
+UNWIND $studyAt AS s
+  MATCH (u:University {id: toInteger(s[0])})
+  MERGE (p)-[:STUDY_AT {classYear: s[1]}]->(u)
+
+WITH DISTINCT p
+
+UNWIND $workAt AS w
+  MATCH (u:Organization {id: toInteger(w[0])})
+  MERGE (p)-[:WORK_AT {classYear: w[1]}]->(u)
+
+Return count (p) as personsAdded
+```
 -----------------
 
 # Additional Queries
