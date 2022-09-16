@@ -265,6 +265,9 @@ CREATE INDEX likesIndex IF NOT EXISTS FOR ()-[r:LIKES]-() ON (r.creationDate);
 
 # Summary Statistics via apoc.meta.stats
 
+The apoc.meta.stats Cypher statement will return a wealth of metadata about the distribution of data in the database.  It gives node counts, relationship counts, label counts and various other Statistics.  This command should be run after the data has been loaded and used as a smoke test to see if the counts are reasonable.  
+
+The following is the output from the apoc command after loading the sf-1 data.
 ``` Cypher
 CALL apoc.meta.stats
 
